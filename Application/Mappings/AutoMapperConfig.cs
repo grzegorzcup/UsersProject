@@ -17,6 +17,7 @@ namespace Application.Mappings
                 cfg.CreateMap<User, UserDto>();
                 cfg.CreateMap<RegisterDto, User>();
                 cfg.CreateMap<Post, PostDto>();
+                cfg.CreateMap<CreatePostDto, Post>();
             })
             .CreateMapper();
     }

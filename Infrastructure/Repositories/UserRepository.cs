@@ -10,12 +10,16 @@ namespace Infrastructure.Repositories
 {
     public class UserRepository : IUserRepository
     {
-        private ISet<User> _users = new HashSet<User>()
+        private static ISet<User> _users = new HashSet<User>()
         {
             new User( 1,"User1","user1@user.com","pasword1"),
             new User( 2,"User2","user2@user.com","pasword2"),
             new User( 3,"User3","user3@user.com","pasword3"),
         };
+        public IEnumerable<User> GetUsers()
+        {
+            return _users;
+        }
         public User Add(User user)
         {
             user.Id = _users.Count() + 1;
@@ -23,7 +27,6 @@ namespace Infrastructure.Repositories
             _users.Add(user);
             return user;
         }
-
         public void Delete(User user)
         {
             _users.Remove(user);
@@ -33,12 +36,6 @@ namespace Infrastructure.Repositories
         {
             return _users.SingleOrDefault(x => x.Id == id);
         }
-
-        public IEnumerable<User> GetUsers()
-        {
-            return _users;
-        }
-
         public void Update(User user)
         {
             user.LastModified= DateTime.Now;

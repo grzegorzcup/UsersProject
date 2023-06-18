@@ -39,9 +39,7 @@ namespace Application.Services
                 throw new Exception("login lub hasło jest puste");
             }
             var user = _mapper.Map<User>(newUser);
-
             _userRepository.Add(user);
-
             return _mapper.Map<UserDto>(user) ; 
         }
     }

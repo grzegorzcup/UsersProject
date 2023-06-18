@@ -37,7 +37,7 @@ namespace WebAPI.Controllers
 
         [SwaggerOperation(Summary ="Dodaje nowego użytkownika")]
         [HttpPost]
-        public IActionResult Register(RegisterDto newUser)
+        public IActionResult RegisterUser(RegisterDto newUser)
         {
             var user = _userService.RegisterUser(newUser);
             return Created($"api/User/{user.Id}", user);

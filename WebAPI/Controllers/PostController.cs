@@ -35,12 +35,13 @@ namespace WebAPI.Controllers
             return Ok(post);
         }
 
-        /*[SwaggerOperation(Summary ="Dodaje nowy post")]
+        [SwaggerOperation(Summary ="Dodaje nowy post")]
         [HttpPost]
-        public IActionResult CreatePost(RegisterDto post)
+        public IActionResult CreatePost(CreatePostDto NewPost)
         {
-            var post = 
-        }*/
+            var post = _postService.CreatePost(NewPost);
+            return Created($"api/posts/{post.Id}", post);
+        }
         
     }
 }
