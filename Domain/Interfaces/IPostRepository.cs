@@ -14,7 +14,7 @@ namespace Domain.Interfaces
         Post GetById(int id);
 
         Post Add(Post post);
-        Post Update(Post post);
+        void Update(Post post);
         void Delete(Post post);
     }
 }

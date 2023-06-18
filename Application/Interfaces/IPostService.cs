@@ -12,6 +12,7 @@ namespace Application.Interfaces
         IEnumerable<PostDto> GetPosts();
 
         PostDto GetPostById(int id);
-        public PostDto CreatePost(CreatePostDto NewPost);
+        PostDto CreatePost(CreatePostDto NewPost);
+        void UpdatePost(UpdatePostDto UpdatePost);
     }
 }

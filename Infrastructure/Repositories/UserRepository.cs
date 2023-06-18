@@ -10,7 +10,7 @@ namespace Infrastructure.Repositories
 {
     public class UserRepository : IUserRepository
     {
-        private static ISet<User> _users = new HashSet<User>()
+        private static readonly ISet<User> _users = new HashSet<User>()
         {
             new User( 1,"User1","user1@user.com","pasword1"),
             new User( 2,"User2","user2@user.com","pasword2"),

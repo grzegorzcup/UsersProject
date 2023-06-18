@@ -10,7 +10,7 @@ namespace Infrastructure.Repositories
 {
     public class PostRepository : IPostRepository
     {
-        private static ISet<Post> _posts = new HashSet<Post>()
+        private static readonly ISet<Post> _posts = new HashSet<Post>()
         {
             new Post (1,"tytuł 1","treść 1"),
             new Post(2, "tytuł 2", "treść 2"),
@@ -39,10 +39,9 @@ namespace Infrastructure.Repositories
             return _posts.SingleOrDefault(p => p.Id == id);
         }
 
-        public Post Update(Post post)
+        public void Update(Post post)
         {
             post.LastModified = DateTime.Now;
-            return post;
         }
     }
 }
