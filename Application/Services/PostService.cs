@@ -5,6 +5,7 @@ using Domain.Entities;
 using Domain.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -45,11 +46,18 @@ namespace Application.Services
             return _mapper.Map<PostDto>(post);
         }
 
-        /*public void UpdatePost(UpdatePostDto UpdatePost)
+        public void UpdatePost(UpdatePostDto updatePost)
         {
-            var existingPost = _postRepository.GetById(UpdatePost.Id);
-            //var Post = _mapper.Map<Post>(UpdatePost, existingPost);
-            _postRepository.Update(Post);
-        }*/
+            var existingPost = _postRepository.GetById(updatePost.Id);
+
+            if (existingPost == null)
+            {
+                throw new Exception("Nie ma takeigo postu");
+            }
+            _mapper.Map(updatePost, existingPost);
+
+            _postRepository.Update(existingPost);
+        }
+
     }
 }

@@ -13,6 +13,6 @@ namespace Application.Interfaces
 
         PostDto GetPostById(int id);
         PostDto CreatePost(CreatePostDto NewPost);
-        void UpdatePost(UpdatePostDto UpdatePost);
+        void UpdatePost(UpdatePostDto updatePost);
     }
 }
