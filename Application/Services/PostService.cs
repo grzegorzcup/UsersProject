@@ -59,5 +59,15 @@ namespace Application.Services
             _postRepository.Update(existingPost);
         }
 
+        public void DeletePost(int id)
+        {
+            var post = _postRepository.GetById(id);
+
+            if (post == null)
+            {
+                throw new Exception($"w bazie nie ma postu z id {id}");
+            }
+            _postRepository.Delete(post);
+        }
     }
 }
