@@ -4,7 +4,9 @@ using Application.Mappings;
 using Application.Services;
 using Domain.Interfaces;
 using Infrastructure;
+using Infrastructure.Data;
 using Infrastructure.Repositories;
+using Microsoft.EntityFrameworkCore;
 
 namespace WebAPI
 {
@@ -15,14 +17,8 @@ namespace WebAPI
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
-            /*builder.Services.AddAuthorization();
-            builder.Services.AddScoped<IUserRepository, UserRepository>();
-            builder.Services.AddScoped<IUserService,UserService>();
-            builder.Services.AddScoped<IPostRepository, PostRepository>();
-            builder.Services.AddScoped<IPostService, PostService>();
-
-            builder.Services.AddSingleton(AutoMapperConfig.Initialize());*/
-            
+            builder.Services.AddDbContext<PostContext>(options =>
+                options.UseSqlServer(builder.Configuration.GetConnectionString("PostCS")));
             builder.Services.AddApplication();
             builder.Services.AddInfrastructure();
             builder.Services.AddControllers(); 
