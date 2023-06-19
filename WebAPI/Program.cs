@@ -2,10 +2,12 @@ using Application;
 using Application.Interfaces;
 using Application.Mappings;
 using Application.Services;
+using Domain.Entities;
 using Domain.Interfaces;
 using Infrastructure;
 using Infrastructure.Data;
 using Infrastructure.Repositories;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace WebAPI
@@ -19,6 +21,16 @@ namespace WebAPI
             // Add services to the container.
             builder.Services.AddDbContext<PostContext>(options =>
                 options.UseSqlServer(builder.Configuration.GetConnectionString("PostCS")));
+
+            builder.Services.AddIdentity<User, IdentityRole>(options =>
+            {
+                options.Password.RequireDigit = false;
+                options.Password.RequiredLength = 3;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase = false;
+                options.Password.RequireLowercase = false;
+            }).AddEntityFrameworkStores<PostContext>();
+
             builder.Services.AddApplication();
             builder.Services.AddInfrastructure();
             builder.Services.AddControllers(); 
