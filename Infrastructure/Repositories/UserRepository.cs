@@ -1,5 +1,6 @@
 ﻿using Domain.Entities;
 using Domain.Interfaces;
+using Infrastructure.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,35 +11,36 @@ namespace Infrastructure.Repositories
 {
     public class UserRepository : IUserRepository
     {
-        private static readonly ISet<User> _users = new HashSet<User>()
+
+        private readonly PostContext _context;
+        public UserRepository(PostContext context)
         {
-            new User( 1,"User1","user1@user.com","pasword1"),
-            new User( 2,"User2","user2@user.com","pasword2"),
-            new User( 3,"User3","user3@user.com","pasword3"),
-        };
+            _context = context;
+        }
         public IEnumerable<User> GetUsers()
         {
-            return _users;
+            return _context.Users;
         }
         public User Add(User user)
         {
-            user.Id = _users.Count() + 1;
-            user.Created= DateTime.Now;
-            _users.Add(user);
+            _context.Users.Add(user);
+            _context.SaveChanges();
             return user;
         }
         public void Delete(User user)
         {
-            _users.Remove(user);
+            _context.Users.Remove(user);
+            _context.SaveChanges();
         }
 
         public User GetUser(int id)
         {
-            return _users.SingleOrDefault(x => x.Id == id);
+            return _context.Users.SingleOrDefault(x => x.Id == id);
         }
         public void Update(User user)
         {
-            user.LastModified= DateTime.Now;
+            _context.Users.Update(user);
+            _context.SaveChanges();
         }
     }
 }

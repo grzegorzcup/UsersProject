@@ -5,27 +5,28 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
+using System.ComponentModel.DataAnnotations;
 
 namespace Domain.Entities
 {
     public class User : IdentityUser
     {
+        [Key]
         public int Id { get; set; }
 
-        public string Name { get; set; }
+        [Required]
+        public string UserName { get; set; }
 
+        [Required]
         public string Email { get; set; }
-
-        public string Password { get; set; }
 
         public User() { }
 
-        public User(int id , string name, string email, string password)
+        public User(int id , string name, string email)
         {
             Id = id;
-            Name = name;
+            UserName = name;
             Email = email;
-            Password = password;
         }
     }
 }

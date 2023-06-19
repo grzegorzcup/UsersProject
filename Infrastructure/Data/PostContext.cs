@@ -19,6 +19,8 @@ namespace Infrastructure.Data
 
         public DbSet<Post> Posts { get; set; }
 
+        public DbSet<User> Users { get; set; }
+
         public override int SaveChanges()
         {
             var entires = ChangeTracker
