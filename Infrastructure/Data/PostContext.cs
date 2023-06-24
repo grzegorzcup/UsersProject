@@ -1,5 +1,6 @@
 ﻿using Domain.Common;
 using Domain.Entities;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System;
@@ -10,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.Data
 {
-    public class PostContext : DbContext
+    public class PostContext : IdentityDbContext
     {
         public PostContext(DbContextOptions options) : base(options)
         {
@@ -18,6 +19,8 @@ namespace Infrastructure.Data
         }
 
         public DbSet<Post> Posts { get; set; }
+
+        public DbSet<User> Users { get; set; }
 
         public override int SaveChanges()
         {
