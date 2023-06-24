@@ -21,14 +21,6 @@ namespace WebAPI
 
             // Add services to the container.
 
-            /*builder.Services.AddIdentity<User, IdentityRole>(options =>
-            {
-                options.Password.RequireDigit = false;
-                options.Password.RequiredLength = 3;
-                options.Password.RequireNonAlphanumeric = false;
-                options.Password.RequireUppercase = false;
-                options.Password.RequireLowercase = false;
-            }).AddEntityFrameworkStores<PostContext>();*/
 
             builder.Services.AddApplication(builder.Configuration);
             builder.Services.AddInfrastructure(builder.Configuration);

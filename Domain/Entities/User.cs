@@ -17,8 +17,7 @@ namespace Domain.Entities
         [Required]
         public string UserName { get; set; }
 
-        [Required]
-        public string Email { get; set; }
+        public string? Email { get; set; }
 
         public User() { }
 

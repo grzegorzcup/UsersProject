@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using Application.DTO;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Identity.Client;
 
@@ -13,5 +14,7 @@ namespace Application.Interfaces
     {
         Task<AuthenticationResult> Login (string username, string password);
         Task<AuthenticationResult> Logout (string username, string password);
+
+        Task<AuthenticationResult> Register(UserRegistrationDto user);
     }
 }

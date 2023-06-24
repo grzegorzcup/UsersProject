@@ -16,6 +16,7 @@ using Microsoft.Extensions.Configuration;
 using Domain.Entities;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using AutoMapper;
 
 namespace Application
 {
@@ -27,6 +28,8 @@ namespace Application
             services.AddScoped<IPostService, PostService>();
             services.AddScoped<IUserService, UserService>();
             services.Configure<JWTConfig>(config.GetSection("JWTConfig"));
+
+            
 
             services.AddAuthentication(options =>
             {

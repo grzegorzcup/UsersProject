@@ -10,14 +10,18 @@ using System.Threading.Tasks;
 
 namespace Application.DTO
 {
-    public class UserDto : IMap
+    public class UserRegistrationDto : IMap
     {
+        [Required]
         public string UserName { get; set; }
+
+        [Required]
         public string Password { get; set; }
 
         public void Mapping(Profile profile)
         {
-            profile.CreateMap<User, UserDto>();
+            profile.CreateMap<User, UserRegistrationDto>();
         }
+
     }
 }

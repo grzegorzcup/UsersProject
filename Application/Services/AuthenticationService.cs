@@ -9,6 +9,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IdentityModel;
+using Microsoft.AspNetCore.Identity.UI.V4.Pages.Account.Internal;
+using Application.DTO;
+using AutoMapper;
+using Domain.Interfaces;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace Application.Services
 {
@@ -16,10 +21,15 @@ namespace Application.Services
     {
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
-        public AuthenticationService(UserManager<User> userManager, SignInManager<User> signInManager)
+        private readonly IPostRepository _postRepository;
+        private readonly IMapper _mapper;
+
+        public AuthenticationService(UserManager<User> userManager, SignInManager<User> signInManager, IPostRepository postRepository, IMapper mapper)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _postRepository = postRepository;
+            _mapper = mapper;
         }
 
         public async Task<AuthenticationResult> Login(string username, string password)
@@ -32,6 +42,15 @@ namespace Application.Services
         public Task<AuthenticationResult> Logout(string username, string password)
         {
             throw new NotImplementedException();
+        }
+
+        public async Task<AuthenticationResult> Register(UserRegistrationDto user)
+        {
+            if (string.IsNullOrEmpty(user.UserName) || string.IsNullOrEmpty(user.Password))
+                throw new Exception("błędne login lub hasło");
+            var newuser = new IdentityUser() { UserName = user.UserName };
+            newuser = _mapper.Map<User>(newuser);
+            var create = await _userManager.CreateAsync((User)newuser, user.Password);
         }
     }
 }
