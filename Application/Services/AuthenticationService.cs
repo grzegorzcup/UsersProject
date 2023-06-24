@@ -14,6 +14,8 @@ using Application.DTO;
 using AutoMapper;
 using Domain.Interfaces;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Application.Authentication;
+using System.Runtime.CompilerServices;
 
 namespace Application.Services
 {
@@ -23,13 +25,15 @@ namespace Application.Services
         private readonly SignInManager<User> _signInManager;
         private readonly IPostRepository _postRepository;
         private readonly IMapper _mapper;
+        private readonly JWTConfig _jWTConfig;
 
-        public AuthenticationService(UserManager<User> userManager, SignInManager<User> signInManager, IPostRepository postRepository, IMapper mapper)
+        public AuthenticationService(UserManager<User> userManager, SignInManager<User> signInManager, IPostRepository postRepository, IMapper mapper, JWTConfig jWTConfig)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _postRepository = postRepository;
             _mapper = mapper;
+            _jWTConfig = jWTConfig;
         }
 
         public async Task<AuthenticationResult> Login(string username, string password)
@@ -51,6 +55,7 @@ namespace Application.Services
             var newuser = new IdentityUser() { UserName = user.UserName };
             newuser = _mapper.Map<User>(newuser);
             var create = await _userManager.CreateAsync((User)newuser, user.Password);
+            
         }
     }
 }
